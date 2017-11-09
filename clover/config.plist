@@ -21,8 +21,6 @@
 			<false/>
 			<key>Fixes</key>
 			<dict>
-				<key>AddPNLF_1000000</key>
-				<false/>
 				<key>FIX_RTC_20000</key>
 				<true/>
 				<key>FIX_TMR_40000</key>
@@ -30,8 +28,6 @@
 				<key>FixHPET_0010</key>
 				<true/>
 				<key>FixIPIC_0040</key>
-				<true/>
-				<key>NewWay_80000000</key>
 				<true/>
 			</dict>
 			<key>Patches</key>
@@ -287,28 +283,18 @@
 	</dict>
 	<key>Boot</key>
 	<dict>
-		<key>Arguments</key>
-		<string></string>
 		<key>Debug</key>
 		<false/>
 		<key>DefaultLoader</key>
 		<string>boot.efi</string>
 		<key>DefaultVolume</key>
 		<string>LastBootedVolume</string>
-		<key>DisableCloverHotkeys</key>
-		<false/>
-		<key>Fast</key>
-		<false/>
 		<key>Legacy</key>
 		<string>PBR</string>
 		<key>NeverDoRecovery</key>
 		<true/>
 		<key>NeverHibernate</key>
 		<true/>
-		<key>SkipHibernateTimeout</key>
-		<false/>
-		<key>StrictHibernate</key>
-		<false/>
 		<key>Timeout</key>
 		<integer>5</integer>
 	</dict>
@@ -329,19 +315,17 @@
 		<key>Audio</key>
 		<dict>
 			<key>Inject</key>
-			<integer>0</integer>
+			<string>0</string>
+			<key>ResetHDA</key>
+			<true/>
 		</dict>
 		<key>USB</key>
 		<dict>
-			<key>AddClockID</key>
-			<false/>
 			<key>FixOwnership</key>
 			<true/>
 			<key>Inject</key>
 			<false/>
 		</dict>
-		<key>UseIntelHDMI</key>
-		<false/>
 	</dict>
 	<key>GUI</key>
 	<dict>
@@ -350,6 +334,8 @@
 			<key>Entries</key>
 			<true/>
 			<key>Legacy</key>
+			<false/>
+			<key>Linux</key>
 			<false/>
 			<key>Tool</key>
 			<true/>
@@ -361,27 +347,27 @@
 	</dict>
 	<key>KernelAndKextPatches</key>
 	<dict>
-		<key>AppleRTC</key>
+		<key>AppleIntelCPUPM</key>
 		<true/>
-		<key>AsusAICPUPM</key>
+		<key>AppleRTC</key>
 		<true/>
 		<key>Debug</key>
 		<false/>
 		<key>KernelCpu</key>
 		<false/>
-		<key>KernelHaswellE</key>
-		<false/>
 		<key>KernelLapic</key>
 		<false/>
 		<key>KernelPm</key>
 		<true/>
+		<key>KernelXCPM</key>
+		<false/>
 		<key>KextsToPatch</key>
 		<array>
 			<dict>
 				<key>Comment</key>
 				<string>Enable 160MB BIOS, 48MB Framebuffer, 48MB Cursor, HDMI @ 0105 for Azul framebuffer 0x0d26000f</string>
 				<key>Disabled</key>
-				<false/>
+				<true/>
 				<key>Find</key>
 				<data>
 				DwAmDQEDAQEAAAAGAAAgAgAAUAEAAABgoQcAAKEHAAAA
@@ -404,6 +390,8 @@
 			<dict>
 				<key>Comment</key>
 				<string>change F%uT%04x to F%uTxxxx in AppleBacklightInjector.kext (credit RehabMan)</string>
+				<key>Disabled</key>
+				<false/>
 				<key>Find</key>
 				<data>
 				RiV1VCUwNHgA
@@ -415,6 +403,120 @@
 				RiV1VHh4eHgA
 				</data>
 			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>Enable 160MB BIOS, 48MB Framebuffer, 48MB Cursor, HDMI @ 0105 for Azul framebuffer 0x0d26000f #2</string>
+				<key>Disabled</key>
+				<false/>
+				<key>Find</key>
+				<data>
+				DwAmDQEDAQEAAAAGAAAgAgAAUAEAAABgoQcAAKEHAAAA
+				AAAAAAAAAAAACAACAAAAMAAAAP8AAAABAAAAQAAAAP8A
+				AAABAAAAQAAAAP8AAAABAAAAQAAAAB4AAAAFBQkCAAAA
+				ADIAAAAOAAAAAAAAAP////8=
+				</data>
+				<key>MatchOS</key>
+				<string>10.13</string>
+				<key>Name</key>
+				<string>AppleIntelFramebufferAzul</string>
+				<key>Replace</key>
+				<data>
+				DwAmDQEDAwMAAAAKAAAAAwAAAAMAAABg2QoAANkKAAAA
+				AAAAAAAAAAAACAACAAAAMAAAAAEFEgAACAAAhwAAAAIE
+				CQAABAAAhwAAAP8AAAABAAAAQAAAAA8AAAABAQAABAAA
+				AAAAAAAOAAAAAAAAAP////8=
+				</data>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>Enable Realtek ALC668 #1</string>
+				<key>Disabled</key>
+				<false/>
+				<key>Find</key>
+				<data>
+				hAjsEA==
+				</data>
+				<key>MatchOS</key>
+				<string>10.13</string>
+				<key>Name</key>
+				<string>AppleHDA</string>
+				<key>Replace</key>
+				<data>
+				AAAAAA==
+				</data>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>Enable Realtek ALC668 #2</string>
+				<key>Disabled</key>
+				<false/>
+				<key>Find</key>
+				<data>
+				hQjsEA==
+				</data>
+				<key>MatchOS</key>
+				<string>10.13</string>
+				<key>Name</key>
+				<string>AppleHDA</string>
+				<key>Replace</key>
+				<data>
+				AAAAAA==
+				</data>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>Enable Realtek ALC668 #3</string>
+				<key>Disabled</key>
+				<false/>
+				<key>Find</key>
+				<data>
+				gxnUEQ==
+				</data>
+				<key>MatchOS</key>
+				<string>10.13</string>
+				<key>Name</key>
+				<string>AppleHDA</string>
+				<key>Replace</key>
+				<data>
+				AAAAAA==
+				</data>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>Enable Realtek ALC668 #4</string>
+				<key>Disabled</key>
+				<false/>
+				<key>Find</key>
+				<data>
+				hBnUEQ==
+				</data>
+				<key>MatchOS</key>
+				<string>10.13</string>
+				<key>Name</key>
+				<string>AppleHDA</string>
+				<key>Replace</key>
+				<data>
+				aAbsEA==
+				</data>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>AirPortBrcm4360 - BCM94352</string>
+				<key>Disabled</key>
+				<true/>
+				<key>Find</key>
+				<data>
+				gflSqgAAdSk=
+				</data>
+				<key>MatchOS</key>
+				<string>10.13</string>
+				<key>Name</key>
+				<string>AirPortBrcm4360</string>
+				<key>Replace</key>
+				<data>
+				gflSqgAAZpA=
+				</data>
+			</dict>
 		</array>
 	</dict>
 	<key>RtVariables</key>
@@ -423,6 +525,8 @@
 		<string>0x28</string>
 		<key>CsrActiveConfig</key>
 		<string>0x67</string>
+		<key>ROM</key>
+		<string>UseMacAddr0</string>
 	</dict>
 	<key>SMBIOS</key>
 	<dict>
@@ -437,7 +541,7 @@
 		<key>BoardManufacturer</key>
 		<string>Apple Inc.</string>
 		<key>BoardSerialNumber</key>
-		<string>C0xxxxxxxxxxxxxxx</string<
+		<string>C02320600OPDJWKA8</string>
 		<key>BoardType</key>
 		<integer>10</integer>
 		<key>ChassisAssetTag</key>
@@ -445,7 +549,7 @@
 		<key>ChassisManufacturer</key>
 		<string>Apple Inc.</string>
 		<key>ChassisType</key>
-		<integer>8</integer>
+		<string>8</string>
 		<key>Family</key>
 		<string>Macbook Pro</string>
 		<key>Manufacturer</key>
@@ -457,7 +561,7 @@
 		<key>ProductName</key>
 		<string>MacBookPro11,2</string>
 		<key>SerialNumber</key>
-		<string>C02xxxxxxxxx</string>
+		<string>C02KR1ZGG86R</string>
 		<key>SmUUID</key>
 		<string>62862c5e-993c-4651-8948-10438a8ca33d</string>
 		<key>Trust</key>
